@@ -12,9 +12,12 @@ pipeline {
 
         stage('Deploy Website') {
             steps {
-                sh '''
-                sudo rm -rf /var/www/html/*
-                sudo cp -r * /var/www/html/
+                bat '''
+                if exist C:\\web-deploy (
+                    rmdir /s /q C:\\web-deploy
+                )
+                mkdir C:\\web-deploy
+                xcopy * C:\\web-deploy /E /H /C /I
                 '''
             }
         }
